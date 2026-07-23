@@ -1,0 +1,49 @@
+name: Deploy Mini Tetris to GitHub Pages
+
+# Publishes the standalone game in ./tetris to GitHub Pages so it can be
+# played from a live URL. Runs on the default branch and on the game's
+# feature branch.
+on:
+  push:
+    branches:
+      - main
+      - claude/mini-tetris-scoring-6oe6t7
+    paths:
+      - 'tetris/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; newer pushes cancel stale runs.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          # Auto-enable Pages for the repo if it isn't already.
+          enablement: true
+
+      - name: Upload game as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: tetris
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
