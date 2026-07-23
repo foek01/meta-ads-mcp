@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Mini Tetris</title>
+
+  <!-- Google Analytics (gtag.js). Replace G-XXXXXXXXXX with your Measurement ID. -->
+  <!-- Loads only when a real ID is set; otherwise events just queue on the dataLayer. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // <-- set your GA4 Measurement ID here
+    function gtag() { window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    if (window.GA_MEASUREMENT_ID && window.GA_MEASUREMENT_ID.indexOf('G-XXXX') === -1) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_MEASUREMENT_ID;
+      document.head.appendChild(s);
+      gtag('config', window.GA_MEASUREMENT_ID);
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <h1>MINI&nbsp;TETRIS</h1>
+    </header>
+
+    <div class="layout">
+      <div class="board-wrap">
+        <canvas id="board" width="240" height="480" aria-label="Tetris board"></canvas>
+
+        <div id="overlay" class="overlay">
+          <div class="overlay-card">
+            <p id="overlay-title">READY?</p>
+            <p id="overlay-sub">Press Start</p>
+            <button id="start-btn" class="btn">START</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="panel">
+          <span class="panel-label">SCORE</span>
+          <span id="score" class="panel-value">0</span>
+        </div>
+        <div class="panel">
+          <span class="panel-label">HIGH SCORE</span>
+          <span id="high-score" class="panel-value">0</span>
+        </div>
+        <div class="panel">
+          <span class="panel-label">LEVEL</span>
+          <span id="level" class="panel-value">1</span>
+        </div>
+        <div class="panel">
+          <span class="panel-label">LINES</span>
+          <span id="lines" class="panel-value">0</span>
+        </div>
+        <div class="panel next-panel">
+          <span class="panel-label">NEXT</span>
+          <canvas id="next" width="96" height="96"></canvas>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Touch controls -->
+    <div class="touch-controls" aria-hidden="false">
+      <button class="tbtn" data-action="left">◄</button>
+      <button class="tbtn" data-action="rotate">⟳</button>
+      <button class="tbtn" data-action="right">►</button>
+      <button class="tbtn" data-action="down">▼</button>
+      <button class="tbtn" data-action="drop">⤓</button>
+    </div>
+
+    <footer class="hints">
+      ← → move · ↑ rotate · ↓ soft drop · space hard drop · P pause
+    </footer>
+  </main>
+
+  <script src="tetris.js"></script>
+</body>
+</html>

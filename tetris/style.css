@@ -1,0 +1,184 @@
+/* ===========================================================
+   Mini Tetris — AMOLED theme
+   Pure-black (#000) background for true-black OLED pixels,
+   neon-tinted accents for contrast.
+   =========================================================== */
+
+:root {
+  --bg: #000000;          /* AMOLED true black */
+  --panel: #0a0a0a;
+  --panel-border: #1c1c1c;
+  --grid: #111111;
+  --text: #f2f2f2;
+  --text-dim: #7a7a7a;
+  --accent: #00e5ff;
+  --accent-2: #ff2e88;
+  --font: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 12px 28px;
+  min-height: 100%;
+}
+
+.topbar h1 {
+  margin: 4px 0 0;
+  font-size: 22px;
+  letter-spacing: 6px;
+  font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+}
+
+.layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ---- Board ---- */
+.board-wrap {
+  position: relative;
+  line-height: 0;
+}
+
+#board {
+  background: #000;
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.08);
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.82);
+  border-radius: 6px;
+  transition: opacity 0.2s ease;
+}
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay-card {
+  text-align: center;
+  padding: 20px;
+}
+#overlay-title {
+  margin: 0 0 6px;
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: var(--accent);
+}
+#overlay-sub {
+  margin: 0 0 18px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.btn {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: transform 0.05s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.4);
+}
+.btn:active { transform: scale(0.96); }
+
+/* ---- Side panels ---- */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 118px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.panel-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+.panel-value {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.next-panel canvas {
+  margin-top: 6px;
+  align-self: center;
+  background: #000;
+}
+
+/* ---- Touch controls ---- */
+.touch-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.tbtn {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  width: 58px;
+  height: 52px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+.tbtn:active { background: #1a1a1a; }
+
+.hints {
+  color: var(--text-dim);
+  font-size: 11px;
+  text-align: center;
+  max-width: 360px;
+}
+
+/* Hide touch controls on devices with a real keyboard / hover */
+@media (hover: hover) and (pointer: fine) {
+  .touch-controls { display: none; }
+}
+
+@media (max-width: 420px) {
+  .topbar h1 { font-size: 18px; letter-spacing: 4px; }
+  .side { min-width: 96px; }
+  .panel-value { font-size: 18px; }
+}
